@@ -130,9 +130,7 @@ const {
                                         type="text"
                                         placeholder="Search by name"
                                         fluid
-                                        @input="
-                                            debounceInputFilter(filterCallback)
-                                            "
+                                        @input="debounceInputFilter(filterCallback)"
                                     />
                                 </template>
                                 <template #body="slotProps">
@@ -151,9 +149,7 @@ const {
                                         type="text"
                                         placeholder="Search by Email"
                                         fluid
-                                        @input="
-                                            debounceInputFilter(filterCallback)
-                                            "
+                                        @input="debounceInputFilter(filterCallback)"
                                     />
                                 </template>
                                 <template #body="slotProps">
@@ -169,9 +165,7 @@ const {
                                         text
                                         rounded
                                         icon="pi pi-ellipsis-v"
-                                        @click="
-                                            toggleUserContextMenu($event, data)
-                                            "
+                                        @click="toggleUserContextMenu($event, data)"
                                     />
                                 </template>
                             </Column>
