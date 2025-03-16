@@ -24,7 +24,7 @@ const mainMenuItems = computed(() => [
     },
 ]);
 
-// User menu (desktop)
+// User menu
 const logoutForm = useForm({});
 const logout = () => {
     logoutForm.post(route('logout'));
@@ -50,7 +50,7 @@ const toggleMobileUserMenu = (event) => {
     mobileUserMenu.value.childRef.toggle(event);
 };
 
-// Mobile menu (Drawer)
+// Mobile drawer menu
 const homeMobileMenuItems = computed(() => [
     {
         label: 'Welcome',
