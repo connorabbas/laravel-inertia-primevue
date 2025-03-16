@@ -53,7 +53,7 @@ onMounted(() => {
     <InertiaHead title="Profile Settings" />
 
     <SettingsLayout>
-        <div class="space-y-4 md:space-y-8">
+        <div class="space-y-4 md:space-y-6">
             <Card
                 pt:body:class="max-w-2xl space-y-3"
                 pt:caption:class="space-y-1"

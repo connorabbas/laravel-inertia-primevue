@@ -37,7 +37,7 @@ const tailwindArbitraryValues = [
 
 const logoutForm = useForm({});
 const logout = () => {
-    logoutForm.post(route('logout'));
+    logoutForm.post(route('admin.logout'));
 };
 const userMenuItems = [
     {
@@ -88,7 +88,7 @@ onMounted(() => {
                 'w-[18rem] inset-0 hidden lg:block fixed overflow-y-auto overflow-x-hidden dynamic-bg border-r dynamic-border',
                 `top-[${headerHeight}]`,
             ]">
-                <div class="flex flex-col justify-between w-full h-full px-8 py-6">
+                <div class="flex flex-col justify-between w-full h-full p-6">
                     <div>
                         <InertiaLink
                             :href="route('welcome')"
@@ -126,16 +126,24 @@ onMounted(() => {
                 'flex flex-col h-full lg:pl-[18rem]',
                 `lg:pt-[${headerHeight}]`,
             ]">
+
                 <!-- Breadcrumbs Nav -->
                 <nav
                     v-if="breadcrumbs.length"
                     class="dynamic-bg border-b dynamic-border"
                 >
-                    <Container fluid>
-                        <LinksBreadcrumb
-                            :model="breadcrumbs"
-                            class="py-4"
-                        />
+                    <Container fluid vertical>
+                        <div class="flex gap-6 items-center">
+                            <div>
+                                <Button
+                                    severity="secondary"
+                                    icon="pi pi-bars"
+                                    text
+                                    @click="emit('open-nav')"
+                                />
+                            </div>
+                            <LinksBreadcrumb :model="breadcrumbs" />
+                        </div>
                     </Container>
                 </nav>
 

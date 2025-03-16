@@ -44,7 +44,7 @@ const sidebarNavItems = computed(() => [
 
         <Divider />
 
-        <div class="flex flex-col gap-6 lg:gap-8 lg:flex-row">
+        <div class="flex flex-col gap-6 lg:gap-6 lg:flex-row">
             <aside class="w-full md:max-w-2xl lg:w-48">
                 <nav class="flex flex-col space-x-0 space-y-1">
                     <Button

@@ -25,11 +25,11 @@ const props = defineProps({
 
 <template>
     <div
-        class="md:px-8"
+        class="md:px-6"
         :class="[
             {
                 'max-w-(--breakpoint-2xl) mx-auto': !props.fluid,
-                'py-4 md:py-8 space-y-4 md:space-y-8': props.vertical
+                'py-4 md:py-6 space-y-4 md:space-y-6': props.vertical
             },
             props.flushMobile ? 'px-0' : 'px-4',
         ]"
