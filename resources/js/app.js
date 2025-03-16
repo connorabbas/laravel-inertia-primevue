@@ -15,10 +15,12 @@ import Container from '@/components/Container.vue';
 import PageTitleSection from '@/components/PageTitleSection.vue';
 
 import customThemePreset from '@/theme/noir-preset';
-import { useDark } from '@vueuse/core';
+import { useColorMode } from '@vueuse/core';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-const darkMode = useDark(); // sets Light/Dark Mode
+
+// Set Light/Dark Color Mode
+const colorMode = useColorMode({ emitAuto: true });
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -29,7 +31,7 @@ createInertiaApp({
         ),
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
-            .provide('darkMode', darkMode)
+            .provide('colorMode', colorMode)
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(PrimeVue, {
