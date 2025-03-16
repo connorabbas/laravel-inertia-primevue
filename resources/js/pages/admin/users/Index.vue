@@ -70,6 +70,9 @@ const {
             <template #title>
                 {{ pageTitle }}
             </template>
+            <template #subTitle>
+                Manage User accounts
+            </template>
             <template #end>
                 <Button
                     v-if="filteredOrSorted"
@@ -82,6 +85,8 @@ const {
                 />
             </template>
         </PageTitleSection>
+
+        <Divider />
 
         <Card pt:body:class="p-3">
             <template #content>
