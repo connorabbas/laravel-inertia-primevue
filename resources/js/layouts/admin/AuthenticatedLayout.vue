@@ -1,10 +1,12 @@
 <script setup>
 import { ref, useTemplateRef, onMounted } from 'vue';
+import { usePage, useForm } from '@inertiajs/vue3';
 import LinksBreadcrumb from '@/components/primevue/LinksBreadcrumb.vue';
+import LinksMenu from '@/components/primevue/LinksMenu.vue';
 import MobileSidebarNavDrawer from '@/components/layout/admin/MobileSidebarNavDrawer.vue';
-import TopNav from '@/components/layout/admin/TopNav.vue';
 import Footer from '@/components/layout/admin/Footer.vue';
 import SideMenuItems from '@/components/layout/admin/SideMenuItems.vue';
+import ApplicationLogo from '@/components/ApplicationLogo.vue';
 
 defineProps({
     pageTitle: {
@@ -18,6 +20,8 @@ defineProps({
     },
 });
 
+const page = usePage();
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const tailwindArbitraryValues = [
     'w-[18rem]', // sidebar width
@@ -30,6 +34,31 @@ const tailwindArbitraryValues = [
     'lg:pt-[64px]',
 ];
 /* eslint-enable @typescript-eslint/no-unused-vars */
+
+const logoutForm = useForm({});
+const logout = () => {
+    logoutForm.post(route('logout'));
+};
+const userMenuItems = [
+    {
+        label: 'Settings',
+        route: route('profile.edit'),
+        icon: 'pi pi-fw pi-cog',
+    },
+    {
+        label: 'Log Out',
+        icon: 'pi pi-fw pi-sign-out',
+        command: () => logout(),
+    },
+];
+const userMenu = useTemplateRef('user-menu');
+const toggleUserMenu = (event) => {
+    userMenu.value.childRef.toggle(event);
+};
+const mobileUserMenu = useTemplateRef('mobile-user-menu');
+const toggleMobileUserMenu = (event) => {
+    mobileUserMenu.value.childRef.toggle(event);
+};
 
 // Drawer menus
 const navDrawerOpen = ref(false);
@@ -53,23 +82,42 @@ onMounted(() => {
             </MobileSidebarNavDrawer>
         </Teleport>
 
-        <header
-            id="site-header"
-            ref="site-header"
-            class="block lg:fixed top-0 left-0 right-0 z-50"
-        >
-            <!-- Main Nav -->
-            <TopNav @open-nav="navDrawerOpen = true" />
-        </header>
-
         <div class="flex-1">
             <!-- Desktop Sidebar -->
             <aside :class="[
                 'w-[18rem] inset-0 hidden lg:block fixed overflow-y-auto overflow-x-hidden dynamic-bg border-r dynamic-border',
                 `top-[${headerHeight}]`,
             ]">
-                <div class="w-full px-8 py-6">
-                    <SideMenuItems />
+                <div class="flex flex-col justify-between w-full h-full px-8 py-6">
+                    <div>
+                        <InertiaLink
+                            :href="route('welcome')"
+                            class="mr-5"
+                        >
+                            <ApplicationLogo
+                                class="block h-10 w-auto fill-current text-surface-900 dark:text-surface-0" />
+                        </InertiaLink>
+                        <SideMenuItems />
+                    </div>
+                    <div>
+                        <Button
+                            id="user-menu-btn"
+                            severity="secondary"
+                            :label="page.props.auth.user.name"
+                            size="large"
+                            icon="pi pi-sort"
+                            iconPos="right"
+                            pt:root:class="flex justify-between"
+                            fluid
+                            text
+                            @click="toggleUserMenu($event)"
+                        />
+                        <LinksMenu
+                            ref="user-menu"
+                            :model="userMenuItems"
+                            popup
+                        />
+                    </div>
                 </div>
             </aside>
 

@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 
-defineProps({
+const props = defineProps({
     laravelVersion: {
         type: String,
         required: true,
@@ -10,6 +10,9 @@ defineProps({
     phpVersion: {
         type: String,
         required: true,
+    },
+    isAdmin: {
+        type: Boolean,
     },
 });
 
