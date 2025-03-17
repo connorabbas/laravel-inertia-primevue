@@ -42,7 +42,7 @@ const logout = () => {
 const userMenuItems = [
     {
         label: 'Settings',
-        route: route('profile.edit'),
+        route: route('admin.profile.edit'),
         icon: 'pi pi-fw pi-cog',
     },
     {
